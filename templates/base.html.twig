@@ -27,6 +27,16 @@
                     <li class="nav-item">
                         <a class="btn btn-outline-light" href="#">Post a Job</a>
                     </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="xnavbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Lang {{ app.request.locale|upper }}
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="xnavbarDropdownMenuLink">
+                            {% for locale in locales %}
+                            <a class="dropdown-item" href="{{ path(app.request.get('_route'), app.request.attributes.get('_route_params')|merge({'_locale': locale})) }}">{{ locale|upper }}</a>
+                            {% endfor %}
+                        </div>
+                    </li>
                 </ul>
             </div>
         </nav>
