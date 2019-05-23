@@ -1,0 +1,54 @@
+App\Entity\Affiliate:
+    type: entity
+    table: affiliate
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        url:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+        email:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+        token:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+        active:
+            type: boolean
+            nullable: false
+        createdAt:
+            type: datetime
+            nullable: false
+            column: created_at
+    manyToMany:
+        categories:
+            targetEntity: Category
+            inversedBy: affiliates
+            joinTable:
+                name: affiliate_category
+                joinColumns:
+                    -
+                        name: affiliate_id
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    -
+                        name: category_id
+                        referencedColumnName: id
+    lifecycleCallbacks:
+        prePersist: [ setCreatedAtValue ]

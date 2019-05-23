@@ -1,0 +1,102 @@
+App\Entity\Job:
+    type: entity
+    table: job
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        type:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+        company:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+        logo:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+        url:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+        position:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+        location:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+        description:
+            type: text
+            nullable: false
+            length: 0
+            options:
+                fixed: false
+        howToApply:
+            type: text
+            nullable: false
+            length: 0
+            options:
+                fixed: false
+            column: how_to_apply
+        token:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+        public:
+            type: boolean
+            nullable: false
+        activated:
+            type: boolean
+            nullable: false
+        email:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+        expiresAt:
+            type: datetime
+            nullable: false
+            column: expires_at
+        createdAt:
+            type: datetime
+            nullable: false
+            column: created_at
+        updatedAt:
+            type: datetime
+            nullable: false
+            column: updated_at
+    manyToOne:
+        category:
+            targetEntity: Category
+            inversedBy: jobs
+            joinColumns:
+                category_id:
+                    referencedColumnName: id
+    lifecycleCallbacks:
+        prePersist: [ setCreatedAtValue ]
+        preUpdate: [ setUpdatedAtValue ]
