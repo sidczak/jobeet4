@@ -98,5 +98,5 @@ App\Entity\Job:
                 category_id:
                     referencedColumnName: id
     lifecycleCallbacks:
-        prePersist: [ setCreatedAtValue ]
-        preUpdate: [ setUpdatedAtValue ]
+        prePersist: [ prePersist ]
+        preUpdate: [ preUpdate ]
