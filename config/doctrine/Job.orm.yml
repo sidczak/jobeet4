@@ -1,5 +1,6 @@
 App\Entity\Job:
     type: entity
+    #repositoryClass: App\Repository\JobRepository
     table: job
     id:
         id:
