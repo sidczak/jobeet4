@@ -1,5 +1,6 @@
 App\Entity\Category:
     type: entity
+    #repositoryClass: App\Repository\CategoryRepository
     table: category
     id:
         id:
@@ -17,12 +18,12 @@ App\Entity\Category:
             length: 100
             options:
                 fixed: false
-        slug:
-            type: string
-            nullable: false
-            length: 128
-            options:
-                fixed: false
+        # slug:
+        #     type: string
+        #     nullable: false
+        #     length: 128
+        #     options:
+        #         fixed: false
     oneToMany:
         jobs:
             targetEntity: Job
