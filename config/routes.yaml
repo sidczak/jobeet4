@@ -1,3 +1,7 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+
+job_homepage:
+    path: /
+    controller: App\Controller\JobController::index
