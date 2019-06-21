@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Job;
+use App\Entity\Category;
 use App\Form\JobType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,10 +35,16 @@ class JobController extends AbstractController
         // )->setParameter('date', new \DateTime());
         // $jobs = $query->getResult();
 
-        $jobs = $em->getRepository(Job::class)->findActiveJobs();
+        // $jobs = $em->getRepository(Job::class)->findActiveJobs();
+
+        // return $this->render('job/index.html.twig', [
+        //     'jobs' => $jobs,
+        // ]);
+
+        $categories = $em->getRepository(Category::class)->findWithActiveJobs();
 
         return $this->render('job/index.html.twig', [
-            'jobs' => $jobs,
+            'categories' => $categories,
         ]);
     }
 

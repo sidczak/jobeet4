@@ -1,6 +1,6 @@
 App\Entity\Category:
     type: entity
-    #repositoryClass: App\Repository\CategoryRepository
+    repositoryClass: App\Repository\CategoryRepository
     table: category
     id:
         id:
