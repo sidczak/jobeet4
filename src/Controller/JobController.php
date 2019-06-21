@@ -29,10 +29,12 @@ class JobController extends AbstractController
         // )->setParameter('date', new \DateTime('-30 days'));
         // $jobs = $query->getResult();
 
-        $query = $em->createQuery(
-            'SELECT j FROM App:Job j WHERE j.expiresAt > :date'
-        )->setParameter('date', new \DateTime());
-        $jobs = $query->getResult();
+        // $query = $em->createQuery(
+        //     'SELECT j FROM App:Job j WHERE j.expiresAt > :date'
+        // )->setParameter('date', new \DateTime());
+        // $jobs = $query->getResult();
+
+        $jobs = $em->getRepository(Job::class)->findActiveJobs();
 
         return $this->render('job/index.html.twig', [
             'jobs' => $jobs,
