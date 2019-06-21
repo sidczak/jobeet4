@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 
 /**
  * @Route("/job")
@@ -72,7 +73,8 @@ class JobController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="job_show", methods={"GET"})
+     * @Route("/{id}", name="job_show", methods={"GET"}, requirements={"id" = "\d+"})
+     * @Entity("job", expr="repository.findActiveJob(id)")
      */
     public function show(Job $job): Response
     {
