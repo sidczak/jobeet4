@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * @Route("/job")
@@ -17,11 +18,21 @@ class JobController extends AbstractController
     /**
      * @Route("/", name="job_index", methods={"GET"})
      */
-    public function index(): Response
+    public function index(EntityManagerInterface $em): Response
     {
-        $jobs = $this->getDoctrine()
-            ->getRepository(Job::class)
-            ->findAll();
+        // $jobs = $this->getDoctrine()
+        //     ->getRepository(Job::class)
+        //     ->findAll();
+
+        // $query = $em->createQuery(
+        //     'SELECT j FROM App:Job j WHERE j.createdAt > :date'
+        // )->setParameter('date', new \DateTime('-30 days'));
+        // $jobs = $query->getResult();
+
+        $query = $em->createQuery(
+            'SELECT j FROM App:Job j WHERE j.expiresAt > :date'
+        )->setParameter('date', new \DateTime());
+        $jobs = $query->getResult();
 
         return $this->render('job/index.html.twig', [
             'jobs' => $jobs,
