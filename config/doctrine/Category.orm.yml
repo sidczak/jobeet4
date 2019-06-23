@@ -18,12 +18,18 @@ App\Entity\Category:
             length: 100
             options:
                 fixed: false
-        # slug:
-        #     type: string
-        #     nullable: false
-        #     length: 128
-        #     options:
-        #         fixed: false
+        slug:
+            type: string
+            nullable: false
+            length: 128
+            options:
+                fixed: false
+            gedmo:
+                slug:
+                  separator: -
+                  # style: camel
+                  fields:
+                    - name
     oneToMany:
         jobs:
             targetEntity: Job

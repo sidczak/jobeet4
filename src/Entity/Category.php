@@ -15,6 +15,8 @@ class Category
 
     private $affiliates;
 
+    private $slug;
+    
     public function __construct()
     {
         $this->jobs = new ArrayCollection();
@@ -110,5 +112,17 @@ class Category
         return $this->jobs->filter(function(Job $job) {
             return $job->getExpiresAt() > new \DateTime();
         });
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
     }
 }
