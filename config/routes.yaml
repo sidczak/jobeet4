@@ -2,6 +2,15 @@
 #    path: /
 #    controller: App\Controller\DefaultController::index
 
+# job_homepage:
+#     path: /
+#     controller: App\Controller\JobController::index
+
 job_homepage:
-    path: /
+    path: /{_locale}
     controller: App\Controller\JobController::index
+    requirements:
+        _locale: en|pl|ru
+    defaults:
+        template: job/index.html.twig
+        _locale: '%locale%'
