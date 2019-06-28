@@ -71,9 +71,9 @@ class JobController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-
+    
     /**
-     * @Route("/{id}", name="job_show", methods={"GET"}, requirements={"id" = "\d+"})
+     * @Route("/{company}/{location}/{id}/{position}", name="job_show", methods={"GET"}, requirements={"id" = "\d+"})
      * @Entity("job", expr="repository.findActiveJob(id)")
      */
     public function show(Job $job): Response

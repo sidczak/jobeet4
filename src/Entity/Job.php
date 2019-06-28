@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Entity;
+use Gedmo\Sluggable\Util as Sluggable;
 
 class Job
 {
@@ -248,5 +249,20 @@ class Job
     public function preUpdate()
     {
         $this->updatedAt = new \DateTime();
+    }
+
+    public function getCompanySlug()
+    {
+        return Sluggable\Urlizer::urlize($this->company, '-');
+    }
+
+    public function getPositionSlug()
+    {
+        return Sluggable\Urlizer::urlize($this->position, '-');
+    }
+ 
+    public function getLocationSlug()
+    {
+        return Sluggable\Urlizer::urlize($this->location, '-');
     }
 }
