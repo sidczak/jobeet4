@@ -10,5 +10,4 @@ $(document).ready(function() {
   $(".dropdown-toggle").dropdown();
 });
 
-
 import 'bootstrap/dist/css/bootstrap.min.css';
