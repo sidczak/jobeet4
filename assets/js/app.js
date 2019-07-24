@@ -1,3 +1,5 @@
+import Vue from 'vue';
+
 // require jQuery normally
 var $ = require('jquery');
 
