@@ -5,7 +5,7 @@
         <title>{% block title %}{{ 'Jobeet - Your best job board'|trans }}{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="stylesheet" href="{{ asset('build/app.css') }}" />
+        <link rel="stylesheet" href="{{ asset('build/jobeet.css') }}" />
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light navbar-dark bg-primary mb-4">
@@ -39,9 +39,10 @@
             </div>
         </nav>
         <div class="container">
+            <div id="app"></div>
             {% block body %}{% endblock %}
             {% block javascripts %}{% endblock %}
-            <script src="{{ asset('build/app.js') }}"></script>
+            <script src="{{ asset('build/jobeet.js') }}"></script>
         </div>
     </body>
 </html>

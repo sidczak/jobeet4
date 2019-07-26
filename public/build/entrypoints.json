@@ -1,11 +1,11 @@
 {
   "entrypoints": {
-    "app": {
+    "jobeet": {
       "css": [
-        "/build/app.css"
+        "/build/jobeet.css"
       ],
       "js": [
-        "/build/app.js"
+        "/build/jobeet.js"
       ]
     }
   }

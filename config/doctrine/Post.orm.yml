@@ -1,0 +1,29 @@
+App\Entity\Post:
+    type: entity
+    table: post
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        message:
+            type: text
+            nullable: false
+            length: 0
+            options:
+                fixed: false
+        createdAt:
+            type: datetime
+            nullable: false
+            column: created_at
+        updatedAt:
+            type: datetime
+            nullable: false
+            column: updated_at
+    lifecycleCallbacks:
+        prePersist: [ prePersist ]
