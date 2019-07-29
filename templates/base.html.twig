@@ -15,11 +15,19 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            Start <span class="sr-only">(current)</span>
+                    {% if app.request.get('_route') ==  'vue_index' %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('job_index') }}">
+                            Job <span class="sr-only">(current)</span>
                         </a>
-                    </li> -->
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('vue_index') }}">
+                            Vue <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    {% endif %}
                 </ul>
                 <ul class="navbar-nav my-lg-0">
                     <li class="nav-item">
@@ -39,7 +47,6 @@
             </div>
         </nav>
         <div class="container">
-            <div id="app"></div>
             {% block body %}{% endblock %}
             {% block javascripts %}{% endblock %}
             <script src="{{ asset('build/jobeet.js') }}"></script>
