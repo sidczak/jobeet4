@@ -1,5 +1,6 @@
 App\Entity\Post:
     type: entity
+    repositoryClass: App\Repository\PostRepository
     table: post
     id:
         id:

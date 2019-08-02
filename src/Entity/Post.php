@@ -51,4 +51,11 @@ class Post
         $this->createdAt = new \DateTime();
         $this->updatedAt = new \DateTime();
     }
+
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
 }
