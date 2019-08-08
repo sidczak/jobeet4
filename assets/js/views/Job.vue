@@ -1,14 +1,13 @@
 <template>
     <div>
         <div class="row col">
-            <h1>Post</h1>
+            <h1>Jobs</h1>
         </div>
         <div class="row col">
             <ol>
-                <li v-for="post in posts">{{ post.message }}</li>
+                <li v-for="job in jobs">{{ job.location }} - {{ job.position }} - {{ job.company }}</li>
             </ol>
         </div>
-        <!-- <button class="btn btn-primary">Add Post</button> -->
     </div>
 </template>
 
@@ -16,15 +15,15 @@
     import axios from 'axios'
 
     export default {
-        name: 'post',
+        name: 'job',
         data() {
             return {
-                posts: {}
+                jobs: {}
             }
         },
         created() {
-            axios.get("http://jobeet4.test/api-posts")
-                .then(res => this.posts = res.data);
+            axios.get("http://jobeet4.test/api-jobs")
+                .then(res => this.jobs = res.data);
         }
     }    
 </script>

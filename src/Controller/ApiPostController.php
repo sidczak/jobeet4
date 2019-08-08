@@ -8,10 +8,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
-class PostController extends ApiController
+class ApiPostController extends ApiController
 {
     /**
-    * @Route("/posts", methods="GET")
+    * @Route("/api-posts", methods="GET")
     */
     public function index(PostRepository $postRepository)
     {
@@ -21,7 +21,7 @@ class PostController extends ApiController
     }
 
     /**
-    * @Route("/posts", methods="POST")
+    * @Route("/api-posts", methods="POST")
     */
     public function create(Request $request, PostRepository $postRepository, EntityManagerInterface $em)
     {

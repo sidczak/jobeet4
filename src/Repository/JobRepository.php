@@ -100,4 +100,27 @@ class JobRepository extends ServiceEntityRepository
             ->setParameter('date', new \DateTime())
             ->getQuery();
     }
+
+    public function transform(Job $job)
+    {
+        return [
+            'id'    => (int) $job->getId(),
+            'company' => (string) $job->getCompany(),
+            'url' => (string) $job->getUrl(),
+            'position' => (string) $job->getPosition(),
+            'location' => (string) $job->getLocation()
+        ];
+    }
+
+    public function transformAll()
+    {
+        $jobs = $this->findAll();
+        $jobsArray = [];
+
+        foreach ($jobs as $job) {
+            $jobsArray[] = $this->transform($job);
+        }
+
+        return $jobsArray;
+    }
 }
