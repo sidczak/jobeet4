@@ -39,6 +39,16 @@ class Job
 
     private $category;
 
+    public const FULL_TIME_TYPE = 'full-time';
+    public const PART_TIME_TYPE = 'part-time';
+    public const FREELANCE_TYPE = 'freelance';
+
+    public const TYPES = [
+        self::FULL_TIME_TYPE,
+        self::PART_TIME_TYPE,
+        self::FREELANCE_TYPE,
+    ];
+
     public function getId(): ?int
     {
         return $this->id;
