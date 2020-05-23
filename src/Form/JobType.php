@@ -15,6 +15,11 @@ use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
+use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\NotNull;
+
 class JobType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -23,30 +28,86 @@ class JobType extends AbstractType
             ->add('type', ChoiceType::class, [
                 'choices' => array_combine(Job::TYPES, Job::TYPES),
                 'expanded' => true,
+                'constraints' => [
+                    new NotBlank(),
+                ]
             ])
-            ->add('company', TextType::class)
+            ->add('company', TextType::class, [
+              'constraints' => [
+                    new NotBlank(),
+                    new Length(['max' => 255]),
+                ]
+            ])
             ->add('logo', TextType::class)
-            ->add('url', UrlType::class)
-            ->add('position', TextType::class)
-            ->add('location', TextType::class)
-            ->add('description', TextareaType::class)
-            ->add('howToApply', TextType::class)
-            ->add('token', TextType::class)
+            ->add('url', UrlType::class, [
+                'required' => false,
+                'constraints' => [
+                    new Length(['max' => 255]),
+                ]
+            ])
+            ->add('position', TextType::class, [
+                'constraints' => [
+                    new NotBlank(),
+                    new Length(['max' => 255]),
+                ]
+            ])
+            ->add('location', TextType::class, [
+                'constraints' => [
+                    new NotBlank(),
+                    new Length(['max' => 255]),
+                ]
+            ])
+            ->add('description', TextareaType::class, [
+                'constraints' => [
+                    new NotBlank(),
+                ]
+            ])
+            ->add('howToApply', TextType::class, [
+                'label' => 'How to apply?',
+                'constraints' => [
+                    new NotBlank(),
+                ]
+            ])
+            ->add('token', TextType::class, [
+                'constraints' => [
+                    new NotBlank(),
+                    new Length(['max' => 255]),
+                ]
+            ])
             ->add('public', ChoiceType::class, [
                 'choices'  => [
                     'Yes' => true,
                     'No' => false,
                 ],
                 'label' => 'Public?',
+                'constraints' => [
+                    new NotNull(),
+                ]
             ])
-            ->add('activated', TextType::class)
-            ->add('email', EmailType::class)
+            ->add('activated', ChoiceType::class, [
+                'choices'  => [
+                    'Yes' => true,
+                    'No' => false,
+                ],
+                'constraints' => [
+                    new NotNull(),
+                ]
+            ])
+            ->add('email', EmailType::class, [
+                'constraints' => [
+                    new NotBlank(),
+                    new Email()
+                ]
+            ])
             // ->add('expiresAt')
             // ->add('createdAt')
             // ->add('updatedAt')
             ->add('category', EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => 'name',
+                'constraints' => [
+                    new NotBlank(),
+                ]
             ])
         ;
     }
