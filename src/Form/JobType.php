@@ -13,12 +13,14 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\NotNull;
+use Symfony\Component\Validator\Constraints\Image;
 
 class JobType extends AbstractType
 {
@@ -38,7 +40,13 @@ class JobType extends AbstractType
                     new Length(['max' => 255]),
                 ]
             ])
-            ->add('logo', TextType::class)
+            // ->add('logo', TextType::class)
+            ->add('logo', FileType::class, [
+                'required' => false,
+                'constraints' => [
+                    new Image(),
+                ]
+            ])
             ->add('url', UrlType::class, [
                 'required' => false,
                 'constraints' => [
