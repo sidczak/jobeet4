@@ -62,11 +62,9 @@ class JobController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             
-            /** @var UploadedFile|null $logoFile */
             $logoFile = $form->get('logo')->getData();
             if ($logoFile instanceof UploadedFile) {
                 $fileName = \bin2hex(\random_bytes(10)) . '.' . $logoFile->guessExtension();
-                // moves the file to the directory where brochures are stored
                 $logoFile->move(
                     $this->getParameter('jobs_directory'),
                     $fileName

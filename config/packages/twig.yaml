@@ -5,5 +5,6 @@ twig:
     globals:
         max_jobs_on_homepage: '%max_jobs_on_homepage%'
         locales: '%locales%'
+        jobs_web_directory: '%jobs_web_directory%'
     # form_themes: ['bootstrap_4_layout.html.twig']
     form_themes: ['bootstrap_4_horizontal_layout.html.twig']
