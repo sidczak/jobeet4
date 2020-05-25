@@ -85,7 +85,7 @@ class JobController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="job_edit", methods={"GET","POST"})
+     * @Route("/{token}/edit", name="job_edit", methods={"GET","POST"}, requirements={"token" = "\w+"})
      */
     public function edit(Request $request, Job $job): Response
     {

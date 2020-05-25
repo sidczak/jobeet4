@@ -43,7 +43,7 @@ class JobType extends AbstractType
             // ->add('logo', TextType::class)
             ->add('logo', FileType::class, [
                 'required' => false,
-                'data_class' => null,
+                // 'data_class' => null,
                 'constraints' => [
                     new Image(),
                 ]
@@ -77,12 +77,12 @@ class JobType extends AbstractType
                     new NotBlank(),
                 ]
             ])
-            ->add('token', TextType::class, [
-                'constraints' => [
-                    new NotBlank(),
-                    new Length(['max' => 255]),
-                ]
-            ])
+            // ->add('token', TextType::class, [
+            //     'constraints' => [
+            //         new NotBlank(),
+            //         new Length(['max' => 255]),
+            //     ]
+            // ])
             ->add('public', ChoiceType::class, [
                 'choices'  => [
                     'Yes' => true,
