@@ -5,19 +5,17 @@ namespace App\Controller;
 use App\Entity\Job;
 use App\Entity\Category;
 use App\Form\JobType;
-// use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * @Route("/job")
  */
-class JobController extends Controller
+class JobController extends AbstractController
 {
     /**
      * @Route("/", name="job_index", methods={"GET"})
@@ -61,16 +59,6 @@ class JobController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            
-            $logoFile = $form->get('logo')->getData();
-            if ($logoFile instanceof UploadedFile) {
-                $fileName = \bin2hex(\random_bytes(10)) . '.' . $logoFile->guessExtension();
-                $logoFile->move(
-                    $this->getParameter('jobs_directory'),
-                    $fileName
-                );
-                $job->setLogo($fileName);
-            }
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($job);
