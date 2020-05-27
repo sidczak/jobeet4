@@ -96,11 +96,13 @@ class JobController extends AbstractController
     public function preview(Job $job) : Response
     {
         $deleteForm = $this->createDeleteForm($job);
+        $publishForm = $this->createPublishForm($job);
 
         return $this->render('job/show.html.twig', [
             'job' => $job,
             'hasControlAccess' => true,
             'deleteForm' => $deleteForm->createView(),
+            'publishForm' => $publishForm->createView(),
         ]);
     }
 
@@ -165,6 +167,35 @@ class JobController extends AbstractController
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('job_delete', ['token' => $job->getToken()]))
             ->setMethod('DELETE')
+            ->getForm();
+    }
+
+    /**
+     * @Route("publish/{token}", name="job_publish", methods="POST", requirements={"token" = "\w+"})
+     */
+    public function publish(Request $request, Job $job) : Response
+    {
+        $form = $this->createPublishForm($job);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $job->setActivated(true);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->flush();
+
+            $this->addFlash('notice', 'Your job was published');
+        }
+
+        return $this->redirectToRoute('job_preview', [
+            'token' => $job->getToken(),
+        ]);
+    }
+
+    private function createPublishForm(Job $job) : FormInterface
+    {
+        return $this->createFormBuilder(['token' => $job->getToken()])
+            ->setAction($this->generateUrl('job_publish', ['token' => $job->getToken()]))
+            ->setMethod('POST')
             ->getForm();
     }
 }
