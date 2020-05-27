@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
+use Symfony\Component\Form\FormInterface;
 
 /**
  * @Route("/job")
@@ -94,9 +95,12 @@ class JobController extends AbstractController
      */
     public function preview(Job $job) : Response
     {
+        $deleteForm = $this->createDeleteForm($job);
+
         return $this->render('job/show.html.twig', [
             'job' => $job,
             'hasControlAccess' => true,
+            'deleteForm' => $deleteForm->createView(),
         ]);
     }
 
@@ -125,17 +129,42 @@ class JobController extends AbstractController
         ]);
     }
 
+    // /**
+    //  * @Route("/{id}", name="job_delete", methods={"DELETE"})
+    //  */
+    // public function delete(Request $request, Job $job): Response
+    // {
+    //     if ($this->isCsrfTokenValid('delete'.$job->getId(), $request->request->get('_token'))) {
+    //         $entityManager = $this->getDoctrine()->getManager();
+    //         $entityManager->remove($job);
+    //         $entityManager->flush();
+    //     }
+
+    //     return $this->redirectToRoute('job_index');
+    // }
+    
     /**
-     * @Route("/{id}", name="job_delete", methods={"DELETE"})
+     * @Route("delete/{token}", name="job_delete", methods="DELETE", requirements={"token" = "\w+"})
      */
-    public function delete(Request $request, Job $job): Response
+    public function delete(Request $request, Job $job) : Response
     {
-        if ($this->isCsrfTokenValid('delete'.$job->getId(), $request->request->get('_token'))) {
+        $form = $this->createDeleteForm($job);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($job);
             $entityManager->flush();
         }
 
         return $this->redirectToRoute('job_index');
+    }
+    
+    private function createDeleteForm(Job $job) : FormInterface
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('job_delete', ['token' => $job->getToken()]))
+            ->setMethod('DELETE')
+            ->getForm();
     }
 }
