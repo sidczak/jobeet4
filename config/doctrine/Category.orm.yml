@@ -34,6 +34,7 @@ App\Entity\Category:
         jobs:
             targetEntity: Job
             mappedBy: category
+            cascade: [ remove ]
     manyToMany:
         affiliates:
             targetEntity: Affiliate
