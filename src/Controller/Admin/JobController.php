@@ -101,4 +101,25 @@ class JobController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * Delete job.
+     *
+     * @Route("/admin/job/{id}/delete", name="admin.job.delete", methods="DELETE", requirements={"id" = "\d+"})
+     *
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     * @param Job $job
+     *
+     * @return Response
+     */
+    public function delete(Request $request, EntityManagerInterface $em, Job $job) : Response
+    {
+        if ($this->isCsrfTokenValid('delete' . $job->getId(), $request->request->get('_token'))) {
+            $em->remove($job);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('admin.job.list');
+    }
 }

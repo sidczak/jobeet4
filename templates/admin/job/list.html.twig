@@ -36,7 +36,11 @@
                         </li>
 
                         <li>
-                            <a href="#" class="btn btn-danger">Delete</a>
+                            <form method="post" action="{{ path('admin.job.delete', {id: job.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ job.id) }}">
+                                <button class="btn btn-danger">Delete</button>
+                            </form>
                         </li>
                     </ul>
                 </td>
