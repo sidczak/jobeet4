@@ -9,6 +9,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 
+use App\Form\JobType;
+use Symfony\Component\HttpFoundation\Request;
+
 class JobController extends AbstractController
 {
     /**
@@ -41,6 +44,34 @@ class JobController extends AbstractController
 
         return $this->render('admin/job/list.html.twig', [
             'jobs' => $jobs,
+        ]);
+    }
+
+    /**
+     * Create job.
+     *
+     * @Route("/admin/job/create", name="admin.job.create", methods="GET|POST")
+     *
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     *
+     * @return Response
+     */
+    public function create(Request $request, EntityManagerInterface $em) : Response
+    {
+        $job = new Job();
+        $form = $this->createForm(JobType::class, $job);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->persist($job);
+            $em->flush();
+
+            return $this->redirectToRoute('admin.job.list');
+        }
+
+        return $this->render('admin/job/create.html.twig', [
+            'form' => $form->createView(),
         ]);
     }
 }
