@@ -12,6 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Component\Form\FormInterface;
+use App\Service\JobHistoryService;
 
 /**
  * @Route("/job")
@@ -21,7 +22,7 @@ class JobController extends AbstractController
     /**
      * @Route("/", name="job_index", methods={"GET"})
      */
-    public function index(EntityManagerInterface $em): Response
+    public function index(EntityManagerInterface $em, JobHistoryService $jobHistoryService): Response
     {
         // $jobs = $this->getDoctrine()
         //     ->getRepository(Job::class)
@@ -47,6 +48,7 @@ class JobController extends AbstractController
 
         return $this->render('job/index.html.twig', [
             'categories' => $categories,
+            'historyJobs' => $jobHistoryService->getJobs(),
         ]);
     }
 
@@ -81,8 +83,10 @@ class JobController extends AbstractController
      * @Route("/{company}/{location}/{id}/{position}", name="job_show", methods={"GET"}, requirements={"id" = "\d+"})
      * @Entity("job", expr="repository.findActiveJob(id)")
      */
-    public function show(Job $job): Response
+    public function show(Job $job, JobHistoryService $jobHistoryService): Response
     {
+        $jobHistoryService->addJob($job);
+
         return $this->render('job/show.html.twig', [
             'job' => $job,
         ]);

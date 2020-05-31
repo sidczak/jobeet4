@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Job;
 use Knp\Component\Pager\PaginatorInterface;
+use App\Service\JobHistoryService;
 
 class CategoryController extends Controller
 
@@ -14,7 +15,7 @@ class CategoryController extends Controller
     /**
      * @Route("/category/{slug}/{page}", name="category_show", methods="GET", defaults={"page": 1}, requirements={"page" = "\d+"})
      */
-    public function show(Category $category,  int $page, PaginatorInterface $paginator) : Response
+    public function show(Category $category,  int $page, PaginatorInterface $paginator, JobHistoryService $jobHistoryService) : Response
     {
 
         $activeJobs = $paginator->paginate(
@@ -26,6 +27,7 @@ class CategoryController extends Controller
         return $this->render('category/show.html.twig', [
             'category' => $category,
             'activeJobs' => $activeJobs,
+            'historyJobs' => $jobHistoryService->getJobs(),
         ]);
     }
 }
