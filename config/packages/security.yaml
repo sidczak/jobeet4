@@ -19,6 +19,7 @@ security:
             http_basic: ~
             # logout:
             #     path:   app_logout
+            #     #target: vue_index
 
             # activate different ways to authenticate
 
