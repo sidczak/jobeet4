@@ -14,3 +14,7 @@ job_homepage:
     defaults:
         template: job/index.html.twig
         _locale: '%locale%'
+
+# app_logout:
+#     path: /logout
+#     methods: GET
