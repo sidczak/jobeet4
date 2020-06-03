@@ -29,6 +29,10 @@
         <source>Sign in</source>
         <target>Войти в систему</target>
       </trans-unit>
+      <trans-unit id="bVBmzKs" resname="Jobs in the %category% category">
+        <source>Jobs in the %category% category</source>
+        <target>Вакансии в %category% категории</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
