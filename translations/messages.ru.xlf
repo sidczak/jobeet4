@@ -17,6 +17,18 @@
         <source>Jobeet - Your best job board</source>
         <target>Jobeet - лучшая платформа для поиска работы</target>
       </trans-unit>
+      <trans-unit id="jC3twAE" resname="Admin Panel">
+        <source>Admin Panel</source>
+        <target>Панель администратора</target>
+      </trans-unit>
+      <trans-unit id="0FJ_Sz1" resname="Logout">
+        <source>Logout</source>
+        <target>Выйти</target>
+      </trans-unit>
+      <trans-unit id="v9QCsvb" resname="Sign in">
+        <source>Sign in</source>
+        <target>Войти в систему</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
