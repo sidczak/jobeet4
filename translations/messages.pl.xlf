@@ -33,6 +33,14 @@
         <source>Jobs in the %category% category</source>
         <target>Oferty pracy w kategorii %category%</target>
       </trans-unit>
+      <trans-unit id="hDTa85S" resname="]-Inf,0] Expired|{1}Expires in 1 day|]1,Inf[ Expires in %days% days">
+        <source>]-Inf,0] Expired|{1}Expires in 1 day|]1,Inf[ Expires in %days% days</source>
+        <target>]-Inf,0] Expired|{1}Expires in 1 day|]1,Inf[ Expires in %days% days</target>
+      </trans-unit>
+      <trans-unit id="PhB5DGQ" resname="[Bookmark this &lt;a href=&quot;%url%&quot;&gt;URL&lt;/a&gt; to manage this job in the future]">
+        <source>[Bookmark this &lt;a href="%url%"&gt;URL&lt;/a&gt; to manage this job in the future]</source>
+        <target><![CDATA[[Dodaj ten adres <a href="%url%">URL</a> do zakładek, aby zarządzać tą pracą w przyszłości]]]></target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

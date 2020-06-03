@@ -15,12 +15,14 @@
         {{ form_end(deleteForm) }}
         <div class="form-inline mr-auto">
             {% if job.activated %}
-                {% if job.expiresAt < date() %}
-                    <span class="navbar-text">Expired</span>
-                {% else %}
-                    <span class="navbar-text">Expires in <strong>{{ job.expiresAt.diff(date())|date('%a') }}</strong> days</span>
-                {% endif %}
+                <span class="navbar-text mr-2">
+                    {% set daysToExpiring = job.expiresAt.diff(date())|date('%a') %}
 
+                    {% transchoice daysToExpiring with {'%days%': daysToExpiring} %}
+                        ]-Inf,0] Expired|{1}Expires in 1 day|]1,Inf[ Expires in %days% days
+                    {% endtranschoice %}
+                </span>
+                
                 {% if job.expiresAt.diff(date())|date('%a') < 5 %}
                     <a class="btn btn-success" href="#">
                         <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
@@ -42,8 +44,8 @@
                 {{ form_end(publishForm) }}
             {% endif %}
         </div>
-        <form class="form-inline my-2 my-lg-0">
-            [Bookmark this <a href="{{ url('job_preview', {token: job.token}) }}">URL</a> to manage this job in the future]
-        </form>
+        <div class="form-inline my-2 my-lg-0">
+            {{ '[Bookmark this <a href="%url%">URL</a> to manage this job in the future]'|trans({'%url%': path('job_preview', {token: job.token})})|raw }}
+        </div>
     </div>
 </nav>
