@@ -5,3 +5,8 @@ controllers:
         en: ''
         pl: '/pl'
         ru: '/ru'
+
+api_controllers:
+    resource: ../../src/Controller/API/
+    type: annotation
+    prefix: /api/v1/
