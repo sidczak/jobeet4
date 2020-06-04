@@ -2,25 +2,62 @@
 
 namespace App\Entity;
 use Gedmo\Sluggable\Util as Sluggable;
+use JMS\Serializer\Annotation as JMS;
 
+/**
+ * @JMS\ExclusionPolicy("all")
+ */
 class Job
 {
+    
+    /**
+     * @JMS\Expose()
+     * @JMS\Type("int")
+     */
     private $id;
 
+    /**
+     * @JMS\Expose()
+     * @JMS\Type("string")
+     */
     private $type;
 
+    /**
+     * @JMS\Expose()
+     * @JMS\Type("string")
+     */
     private $company;
 
     private $logo;
 
+    /**
+     * @JMS\Expose()
+     * @JMS\Type("string")
+     */
     private $url;
 
+    /**
+     * @JMS\Expose()
+     * @JMS\Type("string")
+     */
     private $position;
 
+    /**
+     * @JMS\Expose()
+     * @JMS\Type("string")
+     */
     private $location;
 
+    /**
+     * @JMS\Expose()
+     * @JMS\Type("string")
+     */
     private $description;
 
+    /**
+     * @JMS\Expose()
+     * @JMS\Type("string")
+     */
     private $howToApply;
 
     private $token;
@@ -31,6 +68,10 @@ class Job
 
     private $email;
 
+    /**
+     * @JMS\Expose()
+     * @JMS\Type("DateTime")
+     */
     private $expiresAt;
 
     private $createdAt;
@@ -88,6 +129,17 @@ class Job
         $this->logo = $logo;
 
         return $this;
+    }
+
+    /**
+     * @JMS\VirtualProperty
+     * @JMS\SerializedName("logo_path")
+     *
+     * @return string|null
+     */
+    public function getLogoPath()
+    {
+        return $this->getLogo() ? 'uploads/jobs/' . $this->getLogo()->getFilename() : null;
     }
 
     public function getUrl(): ?string
@@ -244,6 +296,17 @@ class Job
         $this->category = $category;
 
         return $this;
+    }
+
+    /**
+     * @JMS\VirtualProperty
+     * @JMS\SerializedName("category_name")
+     *
+     * @return string
+     */
+    public function getCategoryName()
+    {
+        return $this->getCategory()->getName();
     }
     
     public function prePersist()
