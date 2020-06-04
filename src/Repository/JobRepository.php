@@ -7,6 +7,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use App\Entity\Category;
 use Doctrine\ORM\AbstractQuery;
+use App\Entity\Affiliate;
 
 /**
  * @method Job|null find($id, $lockMode = null, $lockVersion = null)
@@ -128,5 +129,26 @@ class JobRepository extends ServiceEntityRepository
         }
 
         return $jobsArray;
+    }
+
+    /**
+     * @param Affiliate $affiliate
+     *
+     * @return Job[]
+     */
+    public function findActiveJobsForAffiliate(Affiliate $affiliate)
+    {
+        return $this->createQueryBuilder('j')
+            ->leftJoin('j.category', 'c')
+            ->leftJoin('c.affiliates', 'a')
+            ->where('a.id = :affiliate')
+            ->andWhere('j.expiresAt > :date')
+            ->andWhere('j.activated = :activated')
+            ->setParameter('affiliate', $affiliate)
+            ->setParameter('date', new \DateTime())
+            ->setParameter('activated', true)
+            ->orderBy('j.expiresAt', 'DESC')
+            ->getQuery()
+            ->getResult();
     }
 }

@@ -1,5 +1,6 @@
 App\Entity\Affiliate:
     type: entity
+    repositoryClass: App\Repository\AffiliateRepository
     table: affiliate
     id:
         id:
