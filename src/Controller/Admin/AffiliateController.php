@@ -56,16 +56,16 @@ class AffiliateController extends AbstractController
      *
      * @param EntityManagerInterface $em
      * @param Affiliate $affiliate
-     * @param \Swift_Mailer $mailer
+     * @param MailerService $mailer
      *
      * @return Response
      */
-    public function activate(EntityManagerInterface $em, Affiliate $affiliate, \Swift_Mailer $mailer) : Response
+    public function activate(EntityManagerInterface $em, Affiliate $affiliate, MailerService $mailerService) : Response
     {
         $affiliate->setActive(true);
         $em->flush();
         
-        // $mailerService->sendActivationEmail($affiliate);
+        $mailerService->sendActivationEmail($affiliate);
 
         return $this->redirectToRoute('admin.affiliate.list');
     }
