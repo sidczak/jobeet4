@@ -13,7 +13,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 class JobController extends FOSRestController
 {
     /**
-     * @Rest\Get("/{token}/jobs", name="api.job.list")
+     * @Rest\Get("/v1/{token}/jobs", name="api.job.list")
      *
      * @Entity("affiliate", expr="repository.findOneActiveByToken(token)")
      *
