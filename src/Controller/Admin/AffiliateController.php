@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
+use App\Service\MailerService;
 
 class AffiliateController extends AbstractController
 {
@@ -55,13 +56,16 @@ class AffiliateController extends AbstractController
      *
      * @param EntityManagerInterface $em
      * @param Affiliate $affiliate
+     * @param \Swift_Mailer $mailer
      *
      * @return Response
      */
-    public function activate(EntityManagerInterface $em, Affiliate $affiliate) : Response
+    public function activate(EntityManagerInterface $em, Affiliate $affiliate, \Swift_Mailer $mailer) : Response
     {
         $affiliate->setActive(true);
         $em->flush();
+        
+        // $mailerService->sendActivationEmail($affiliate);
 
         return $this->redirectToRoute('admin.affiliate.list');
     }
@@ -87,4 +91,6 @@ class AffiliateController extends AbstractController
 
         return $this->redirectToRoute('admin.affiliate.list');
     }
+
+
 }
