@@ -27,6 +27,16 @@ class AffiliateController extends AbstractController
     {
         $affiliate = new Affiliate();
         $form = $this->createForm(AffiliateType::class, $affiliate);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $affiliate->setActive(false);
+
+            $em->persist($affiliate);
+            $em->flush();
+
+            return $this->redirectToRoute('affiliate.wait');
+        }
 
         return $this->render('affiliate/create.html.twig', [
             'form' => $form->createView(),
