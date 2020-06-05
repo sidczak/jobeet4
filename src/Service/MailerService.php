@@ -33,7 +33,7 @@ class MailerService
         $message = (new Swift_Message())
             ->setSubject('Account activation')
             ->setTo($affiliate->getEmail())
-            ->setFrom('jobeet@example.com')
+            ->setFrom('szymon.idczak@example.com')
             ->setBody(
                 $this->templateEngine->render(
                     'emails/affiliate_activation.html.twig',
