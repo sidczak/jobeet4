@@ -8,6 +8,8 @@ class Post
 
     private $message;
 
+    private $count;
+
     private $createdAt;
 
     private $updatedAt;
@@ -55,6 +57,18 @@ class Post
     public function setUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getCount(): ?int
+    {
+        return $this->count;
+    }
+
+    public function setCount(?int $count): self
+    {
+        $this->count = $count;
 
         return $this;
     }

@@ -23,8 +23,8 @@ class PostRepository extends ServiceEntityRepository
     {
         return [
                 'id'    => (int) $post->getId(),
-                'message' => (string) $post->getMessage()
-                // 'count' => (int) $post->getCount()
+                'message' => (string) $post->getMessage(),
+                'count' => (int) $post->getCount()
         ];
     }
 

@@ -39,11 +39,32 @@ class ApiPostController extends ApiController
         // persist the new post
         $post = new Post;
         $post->setMessage($request->get('message'));
-        // $post->setCount(0);
+        $post->setCount(0);
         $em->persist($post);
         $em->flush();
 
         return $this->respondCreated($postRepository->transform($post));
+    }
+
+    /**
+    * @Route("/api-posts/{id}/count", methods="POST")
+    */
+    public function increaseCount($id, EntityManagerInterface $em, PostRepository $postRepository)
+    {
+        $post = $postRepository->find($id);
+
+        if (! $post) {
+            return $this->respondNotFound();
+        }
+
+        $post->setCount($post->getCount() + 1);
+        $em->persist($post);
+        $em->flush();
+
+        return $this->respond([
+            'count' => $post->getCount()
+        ]);
+
     }
 
 }

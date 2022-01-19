@@ -16,9 +16,11 @@ class PostFixtures extends Fixture
     {
         $post1 = new Post();
         $post1->setMessage('Post1 Lorem ipsum dolor sit amet, consectetur adipisicing elit.');
+        $post1->setCount(3);
 
         $post2 = new Post();
         $post2->setMessage('Post2 Lorem ipsum dolor sit amet, consectetur adipisicing elit.');
+        $post2->setCount(2);
 
         $manager->persist($post1);
         $manager->persist($post2);
@@ -26,6 +28,7 @@ class PostFixtures extends Fixture
         for ($i = 10; $i <= 20; $i++) {
             $post = new Post();
             $post->setMessage('Post '. $i .' Lorem ipsum dolor sit amet, consectetur adipisicing elit.');
+            $post->setCount(1);
 
             $manager->persist($post);
         }

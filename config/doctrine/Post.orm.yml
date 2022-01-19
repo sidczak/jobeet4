@@ -18,6 +18,9 @@ App\Entity\Post:
             length: 0
             options:
                 fixed: false
+        count:
+            type: integer
+            nullable: true
         createdAt:
             type: datetime
             nullable: false
