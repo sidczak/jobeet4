@@ -22,7 +22,8 @@
             }
         },
         created() {
-            axios.get("http://jobeet4.test/api-jobs")
+            // axios.get("http://jobeet4.test/api-jobs")
+            axios.get("/api-jobs")
                 .then(res => this.jobs = res.data);
         }
     }    
